@@ -7,6 +7,7 @@ name = "ORM_RUST"
 version = "0.1.0"
 dependencies = [
  "mongodb",
+ "serde",
 ]
 
 [[package]]
