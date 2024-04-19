@@ -3,7 +3,8 @@ use dotenv::dotenv;
 use ORM_RUST::db::connect;
 use ORM_RUST::create_collection::create_collection;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     // load env vars
     dotenv().ok();
 
@@ -11,6 +12,7 @@ fn main() {
     let conn_str = env::var("MONGODB_URI").expect("MONGODB_URI must be set");
 
     // create a collection
+    let db_name = "orm_rust";
     let collection_name = "users";
     let schema = r#"
         {
@@ -19,8 +21,7 @@ fn main() {
             "age": "number"
         }
     "#;
-    create_collection(collection_name, conn_str);
-    println!("Collection created successfully");
+    create_collection(db_name,collection_name, conn_str).await;
 
     
 }
